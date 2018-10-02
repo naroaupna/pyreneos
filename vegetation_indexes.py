@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Apr 27 19:31:55 2018
+Created on 02-10-2018
 
-@author: Naroa
+@author: naroairiarte
 
-This function calculates the NDVI index of the bands 04 and 08.
+This module contains different vegetation indexes.
 """
+
 
 import os
 import numpy as np
 from osgeo import gdal, osr
 import sys
 
+# Constants for the calculation of the NDVI
 
 MOSAIC_B04 = 'mosaic_image_B04masked_QSC.jp2'
 MOSAIC_B08 = 'mosaic_image_B08masked_QSC.jp2'
@@ -21,7 +23,7 @@ BAND_04 = 'B04'
 BAND_08 = 'B08'
 
 
-def calculate_NDVI_V1(path):
+def ndvi_index(path):
     """ calculates the NDVI index of the bands 04 and 08. The images which will
     be used to calculate the NDVI are the ones obtained by the mosaicizing
     process of the images of the band 4 and 8.

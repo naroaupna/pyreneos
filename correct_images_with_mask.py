@@ -14,7 +14,7 @@ from osgeo import gdal, osr
 import os
 import obtain_mask as om
 import shutil
-import calculate_NDVI as cndvi
+import vegetation_indexes as vi
 
 
 JP2 = '.jp2'
@@ -57,7 +57,7 @@ def correct_images(path, only_ndvi):
                     _generate_masked_rasters_20m_bands(raster, actual_mask, actual_path)
             if (only_ndvi):
                 if (masks_and_paths_list[i][1] not in used_paths_for_ndvi):
-                    cndvi.calculate_NDVI_V1(masks_and_paths_list[i][1])
+                    vi.ndvi_index(masks_and_paths_list[i][1])
                     used_paths_for_ndvi.append(masks_and_paths_list[i][1])
 
 
