@@ -15,8 +15,8 @@ import sys
 
 # Constants for the calculation of the NDVI
 
-MOSAIC_B04 = 'mosaic_image_B04masked_QSC.jp2'
-MOSAIC_B08 = 'mosaic_image_B08masked_QSC.jp2'
+MOSAIC_B04 = 'mosaic_image_masked_B04.jp2'
+MOSAIC_B08 = 'mosaic_image_masked_B08.jp2'
 NDVI = '_NDVI.tif'
 JP2 = '.jp2'
 BAND_04 = 'B04'

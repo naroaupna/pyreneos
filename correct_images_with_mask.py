@@ -73,7 +73,8 @@ def _get_raster_array(raster):
 
 def _get_raster_array_resampled(raster):
     img_name = os.path.basename(raster)
-    img_name = img_name.replace(JP2, RESAMPLED)
+    #img_name = img_name.replace(JP2, RESAMPLED)
+    img_name = img_name.replace('rmasked', 'resampled_masked')
     path_to_new_image = os.path.dirname(raster)
     img_name_with_path = os.path.join(path_to_new_image, img_name)
     raster_image = gdal.Open(raster, gdal.GA_Update)
@@ -163,7 +164,8 @@ def _generate_masked_rasters_10m_bands(raster, actual_mask, actual_path):
     """ This function generates the 10 meters rasters.
     """
     filename = os.path.basename(raster)
-    image_copy_name = filename.replace(JP2, MASKED)
+    band_name = _get_image_band(filename)
+    image_copy_name = filename.replace(band_name + JP2, 'masked_'+band_name+JP2)
     image_copy = os.path.join(actual_path, image_copy_name)
     shutil.copy(raster, image_copy)
     raster_array, raster_image = _get_raster_array(image_copy)
@@ -177,14 +179,25 @@ def _generate_masked_rasters_20m_bands(raster, actual_mask, actual_path):
     """ This function generates the 20 meters rasters.
     """
     filename = os.path.basename(raster)
-    image_copy_name = filename.replace(JP2, MASKED)
+    band_name = _get_image_band(filename)
+    image_copy_name = filename.replace(band_name + JP2, 'masked_' + band_name + JP2)
     image_copy = os.path.join(actual_path, image_copy_name)
     shutil.copy(raster, image_copy)
     raster_array, raster_image = _get_raster_array_resampled(image_copy)
     filename_2 = os.path.basename(image_copy)
-    image_copy_name_2 = filename_2.replace(JP2, MASKED)
+    image_copy_name_2 = filename_2.replace('masked_', 'rmasked_')
+    #image_copy_name_2 = filename_2.replace(JP2, MASKED)
     image_copy_2 = os.path.join(actual_path, image_copy_name_2)
     shutil.copy(image_copy, image_copy_2)
     out_raster = raster_array * actual_mask
     _store_and_create_masked_raster_resampled(out_raster,
                                               image_copy_2)
+
+
+def _get_image_band(image_name):
+    """This function extracts the band name of a image.
+    """
+    n, ext = os.path.splitext(image_name)
+    ind = n.rfind('_')
+    band_name = n[ind + 1:]
+    return band_name

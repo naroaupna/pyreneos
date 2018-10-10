@@ -183,27 +183,38 @@ def _generate_mosaic(array_of_quartet):
     contained in the array which the function needs as argument.
     """
     if (BAND_04 + TEN_METERS in array_of_quartet[1]):
-        filename = _generate_filename(BAND_04, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename = _generate_filename(BAND_04, raster_name)
     elif (BAND_08 + TEN_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_08, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_08, raster_name)
     elif (BAND_SCL in array_of_quartet[1]):
-        filename =_generate_filename(BAND_SCL, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_SCL, raster_name)
     elif (BAND_03 + TEN_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_03, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_03, raster_name)
     elif (BAND_05 + TWENTY_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_05, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_05, raster_name)
     elif (BAND_02 + TEN_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_02, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_02, raster_name)
     elif (BAND_06 + TWENTY_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_06, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_06, raster_name)
     elif (BAND_07 + TWENTY_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_07, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_07, raster_name)
     elif (BAND_8A + TWENTY_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_8A, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_8A, raster_name)
     elif (BAND_11 + TWENTY_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_11, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_11, raster_name)
     elif (BAND_12 + TWENTY_METERS in array_of_quartet[1]):
-        filename =_generate_filename(BAND_12, array_of_quartet[1])
+        raster_name = os.path.basename(array_of_quartet[1])
+        filename =_generate_filename(BAND_12, raster_name)
     filename_path = os.path.dirname(array_of_quartet[1])
     output_path = _get_filename(os.path.join(filename_path, filename))
     output_intermediate_filename = os.path.basename(filename)
