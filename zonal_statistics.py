@@ -76,4 +76,4 @@ def _is_image_to_calculate_stats(raster):
            ('_masked_B04' in raster) or ('_NDVI' in raster)
 
 
-get_zonal_stats('/home/naroairirarte/Desktop/zonal_s2/Dec16_V180925.shp', '/home/naroairirarte/Desktop/zonal_s2')
+get_zonal_stats('/home/naroairirarte/Desktop/stats/Dec16_V181003_buffer5m.shp', '/home/naroairirarte/Desktop/stats')

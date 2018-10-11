@@ -16,4 +16,4 @@ def treat_images_to_obtain_NDVI(path):
     ciwm.correct_images(path, True)
 
 
-treat_images_to_obtain_NDVI('/home/naroairirarte/Desktop/test_mosaic')
+treat_images_to_obtain_NDVI('/home/naroairirarte/Desktop/prueba_final_2017')

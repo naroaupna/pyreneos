@@ -168,6 +168,7 @@ def _generate_masked_rasters_10m_bands(raster, actual_mask, actual_path):
     image_copy_name = filename.replace(band_name + JP2, 'masked_'+band_name+JP2)
     image_copy = os.path.join(actual_path, image_copy_name)
     shutil.copy(raster, image_copy)
+    os.remove(raster)
     raster_array, raster_image = _get_raster_array(image_copy)
     out_raster = raster_array * actual_mask
     _store_and_create_masked_raster(out_raster,
@@ -183,12 +184,13 @@ def _generate_masked_rasters_20m_bands(raster, actual_mask, actual_path):
     image_copy_name = filename.replace(band_name + JP2, 'masked_' + band_name + JP2)
     image_copy = os.path.join(actual_path, image_copy_name)
     shutil.copy(raster, image_copy)
+    os.remove(raster)
     raster_array, raster_image = _get_raster_array_resampled(image_copy)
     filename_2 = os.path.basename(image_copy)
     image_copy_name_2 = filename_2.replace('masked_', 'rmasked_')
-    #image_copy_name_2 = filename_2.replace(JP2, MASKED)
     image_copy_2 = os.path.join(actual_path, image_copy_name_2)
     shutil.copy(image_copy, image_copy_2)
+    os.remove(image_copy)
     out_raster = raster_array * actual_mask
     _store_and_create_masked_raster_resampled(out_raster,
                                               image_copy_2)
