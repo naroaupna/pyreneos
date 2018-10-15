@@ -116,7 +116,6 @@ def _store_and_create_masked_raster(out_raster, raster_image, raster):
     raster_image = None
 
 
-
 def _store_and_create_masked_raster_resampled(out_raster, raster):
     """ This function creates a resampled raster and stores it.
     """
@@ -127,16 +126,16 @@ def _store_and_create_masked_raster_resampled(out_raster, raster):
         print('Exiting the program...')
         sys.exit(1)
     drv = gdal.GetDriverByName("MEM")
-    dst_ds = drv.Create("", image.RasterXSize * 2, image.RasterYSize * 2, 1, gdal.GDT_UInt16)
+    dst_ds = drv.Create("", image.RasterXSize, image.RasterYSize, 1, gdal.GDT_UInt16)
     dst_ds.SetGeoTransform(image.GetGeoTransform())
     dst_ds.SetProjection(image.GetProjectionRef())
     dst_ds.GetRasterBand(1).WriteArray(out_raster)
     geoT = image.GetGeoTransform()
     drv = gdal.GetDriverByName("GTiff")
     resampled_image = drv.Create(mask_name_with_path, \
-                                image.RasterXSize * 2, image.RasterYSize * 2, 1, gdal.GDT_UInt16)
-    this_geoT = (geoT[0], geoT[1] / 2, geoT[2], geoT[3], \
-                 geoT[4], geoT[5] / 2)
+                                image.RasterXSize, image.RasterYSize, 1, gdal.GDT_UInt16)
+    this_geoT = (geoT[0], geoT[1], geoT[2], geoT[3], \
+                 geoT[4], geoT[5])
     resampled_image.SetGeoTransform(this_geoT)
     resampled_image.SetProjection(image.GetProjectionRef())
     gdal.RegenerateOverviews(dst_ds.GetRasterBand(1), \
