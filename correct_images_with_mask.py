@@ -73,7 +73,6 @@ def _get_raster_array(raster):
 
 def _get_raster_array_resampled(raster):
     img_name = os.path.basename(raster)
-    #img_name = img_name.replace(JP2, RESAMPLED)
     img_name = img_name.replace('rmasked', 'resampled_masked')
     path_to_new_image = os.path.dirname(raster)
     img_name_with_path = os.path.join(path_to_new_image, img_name)
