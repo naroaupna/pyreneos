@@ -60,9 +60,6 @@ def _generate_mask_image(mask_path):
     mask_array[mask_array == 4] = 1
     mask_array[mask_array == 5] = 1
     mask_array[mask_array != 1] = 0
-    nan_values = np.isnan(mask_array)
-    #TODO: Hay que cambiar que los Nan no sean 0
-    mask_array[nan_values] = 0
     drv = gdal.GetDriverByName("MEM")
     dst_ds = drv.Create("", mask.RasterXSize, mask.RasterYSize, \
                         1, gdal.GDT_UInt16)
