@@ -17,7 +17,7 @@ import sys
 
 MOSAIC_B04 = 'mosaic_image_masked_B04.jp2'
 MOSAIC_B08 = 'mosaic_image_masked_B08.jp2'
-NDVI = '_NDVI.tif'
+NDVI = 'NDVI.jp2'
 JP2 = '.jp2'
 BAND_04 = 'B04'
 BAND_08 = 'B08'

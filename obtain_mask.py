@@ -48,7 +48,6 @@ def get_masks(path):
 def _generate_mask_image(mask_path):
     """ Generates the mask and adapts the size to the original file."""
     mask_name = os.path.basename(mask_path)
-    mask_name = mask_name.replace('.jp2', 'mask.tif')
     path_to_new_image = os.path.dirname(mask_path)
     mask_name_with_path = os.path.join(path_to_new_image, mask_name)
     mask = gdal.Open(mask_path, gdal.GA_Update)
@@ -76,7 +75,6 @@ def _generate_mask_image(mask_path):
     resampled_mask.SetProjection(mask.GetProjectionRef())
     gdal.RegenerateOverviews(dst_ds.GetRasterBand(1), \
                              [resampled_mask.GetRasterBand(1)], 'mode')
-    resampled_mask.GetRasterBand(1).SetNoDataValue(0)
     resampled_mask_array = resampled_mask.ReadAsArray()
     resampled_mask = None
     return resampled_mask_array

@@ -105,14 +105,27 @@ def _get_raster_array_resampled(raster):
     return resampled_array, raster_image
 
 
-def _store_and_create_masked_raster(out_raster, raster_image, raster):
+
+def _store_and_create_masked_raster(out_raster, raster_image):
     """ This function creates and stores the masked rasters.
     """
-    band = raster_image.GetRasterBand(1)
+    image = gdal.Open(raster_image, gdal.GA_Update)
+    if image is None:
+        print('Mask image could not be opened...')
+        print('Exiting the program...')
+        sys.exit(1)
+    band = image.GetRasterBand(1)
     band.WriteArray(out_raster)
     projection = osr.SpatialReference()
-    projection.ImportFromWkt(raster_image.GetProjectionRef())
-    raster_image = None
+    projection.ImportFromWkt(image.GetProjectionRef())
+    image.GetRasterBand(1).SetNoDataValue(0)
+    band_1 = image.GetRasterBand(1)
+    raster_array = band_1.ReadAsArray()
+    raster_array[raster_array == -999] = 0
+    band_1.WriteArray(raster_array)
+    projection = osr.SpatialReference()
+    projection.ImportFromWkt(image.GetProjectionRef())
+    image = None
 
 
 def _store_and_create_masked_raster_resampled(out_raster, raster):
@@ -140,6 +153,12 @@ def _store_and_create_masked_raster_resampled(out_raster, raster):
     gdal.RegenerateOverviews(dst_ds.GetRasterBand(1), \
                              [resampled_image.GetRasterBand(1)], 'mode')
     resampled_image.GetRasterBand(1).SetNoDataValue(0)
+    band_1 = resampled_image.GetRasterBand(1)
+    raster_array = band_1.ReadAsArray()
+    raster_array[raster_array == -999] = 0
+    band_1.WriteArray(raster_array)
+    projection = osr.SpatialReference()
+    projection.ImportFromWkt(resampled_image.GetProjectionRef())
     resampled_image = None
 
 
@@ -168,9 +187,9 @@ def _generate_masked_rasters_10m_bands(raster, actual_mask, actual_path):
     shutil.copy(raster, image_copy)
     os.remove(raster)
     raster_array, raster_image = _get_raster_array(image_copy)
+    raster_array[raster_array == 0] = -999
     out_raster = raster_array * actual_mask
     _store_and_create_masked_raster(out_raster,
-                                    raster_image,
                                     image_copy)
 
 
@@ -184,6 +203,7 @@ def _generate_masked_rasters_20m_bands(raster, actual_mask, actual_path):
     shutil.copy(raster, image_copy)
     os.remove(raster)
     raster_array, raster_image = _get_raster_array_resampled(image_copy)
+    raster_array[raster_array == 0] = -999
     filename_2 = os.path.basename(image_copy)
     image_copy_name_2 = filename_2.replace('masked_', 'rmasked_')
     image_copy_2 = os.path.join(actual_path, image_copy_name_2)

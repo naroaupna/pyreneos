@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Apr 19 12:35:32 2018
-
 @author: naroairiarte
-
 This module is implemented to create the mosaic of the raster images of
 TWM, TWN, TXM and TXN tiles.
 """
@@ -234,5 +232,5 @@ def _generate_filename(band, element):
 def _create_mosaic(output_filename, array_of_quartet):
     """ This function creates the mosaic using a gdal function.
     """
-    os.system('gdal_merge.py -o ' + output_filename + ' ' + array_of_quartet[0]
-              + ' ' + array_of_quartet[1] + ' ' + array_of_quartet[2] + ' ' + array_of_quartet[3])
+    os.system('gdal_merge.py -o ' + output_filename + ' ' + array_of_quartet[0] +
+              ' ' + array_of_quartet[1] + ' ' + array_of_quartet[2] + ' ' + array_of_quartet[3])
