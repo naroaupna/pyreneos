@@ -27,8 +27,10 @@ TEN_METERS = '_10m'
 TWENTY_METERS = '_20m'
 XML = '.xml'
 JP2 = '.jp2'
-YEAR_2017 = '/2017'
-YEAR_2016 = '/2016'
+YEAR_2017 = '/2017/'
+YEAR_2016 = '/2016/'
+YEAR_2015 = '/2015/'
+YEAR_2018 = '/2018/'
 
 
 
@@ -158,12 +160,19 @@ def _get_filename(path):
     """ This function gets the filename of a complete path name.
     """
     directory = ''
-    if (YEAR_2017 in path):
+    if ((YEAR_2017 in path) and ('.SAFE' not in path)):
         directory = os.path.dirname(os.path.dirname(
             os.path.dirname(
                 os.path.dirname(
                     os.path.dirname(
                         os.path.dirname(path))))))
+    elif ((YEAR_2017 in path) and ('.SAFE' in path)):
+        directory = os.path.dirname(os.path.dirname(
+            os.path.dirname(
+                os.path.dirname(
+                    os.path.dirname(
+                        os.path.dirname(
+                            os.path.dirname(path)))))))
     elif ((YEAR_2016 in path) and ('image_SCL' not in path)):
         directory = os.path.dirname(os.path.dirname(
             os.path.dirname(
@@ -173,6 +182,18 @@ def _get_filename(path):
         directory = os.path.dirname(os.path.dirname(
             os.path.dirname(
                 os.path.dirname(path))))
+    #TODO: poner esto como dios manda
+    elif ((YEAR_2015 in path)):
+        directory = os.path.dirname(os.path.dirname(
+            os.path.dirname(
+                os.path.dirname(
+                    os.path.dirname(path)))))
+    elif (YEAR_2018 in path):
+        directory = os.path.dirname(os.path.dirname(
+            os.path.dirname(
+                os.path.dirname(
+                    os.path.dirname(
+                        os.path.dirname(path))))))
     return directory
 
 
