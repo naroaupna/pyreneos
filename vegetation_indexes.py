@@ -87,9 +87,9 @@ def _calcultate_ndvi_images(b4, b8):
     r = r / 10000
     n = n / 10000
     np.seterr(invalid='ignore')
-    ndvi = (n - r) / (n + r)
-    nan_values = np.isnan(ndvi)
-    ndvi[nan_values] = -1
+    subs = n - r
+    addi = n + r
+    ndvi = _safe_div(subs, addi)
     output.GetRasterBand(1).WriteArray(ndvi)
     output.SetGeoTransform(transform)
     wkt = b4_image.GetProjection()
@@ -100,3 +100,9 @@ def _calcultate_ndvi_images(b4, b8):
     b8_image = None
     output = None
 
+
+def _safe_div(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return 0
