@@ -59,6 +59,7 @@ def correct_images(path, only_ndvi):
                 if (masks_and_paths_list[i][1] not in used_paths_for_ndvi):
                     vi.ndvi_index(masks_and_paths_list[i][1])
                     used_paths_for_ndvi.append(masks_and_paths_list[i][1])
+    del masks_and_paths_list[:]
 
 
 def _get_raster_array(raster):
@@ -181,6 +182,8 @@ def _generate_masked_rasters_10m_bands(raster, actual_mask, actual_path):
     """ This function generates the 10 meters rasters.
     """
     filename = os.path.basename(raster)
+    print('Este es el raster que estamos tratando: ')
+    print(filename)
     band_name = _get_image_band(filename)
     image_copy_name = filename.replace(band_name + JP2, 'masked_'+band_name+JP2)
     image_copy = os.path.join(actual_path, image_copy_name)

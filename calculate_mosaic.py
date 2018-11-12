@@ -160,7 +160,7 @@ def _get_filename(path):
     """ This function gets the filename of a complete path name.
     """
     directory = ''
-    if ((YEAR_2017 in path) and ('.SAFE' not in path)):
+    if ((YEAR_2017 in path) and ('.SAFE' not in path)) or ('20170129' in path):
         directory = os.path.dirname(os.path.dirname(
             os.path.dirname(
                 os.path.dirname(
