@@ -106,6 +106,11 @@ def get_image_date(filename):
         filename_middle = filename[ind + 1:]
         ind_2 = filename_middle.find('_')
         date = filename_middle[:ind_2]
+    elif ('2017' in filename) and ('L2A' not in filename):
+        ind = filename.replace('_', 'X', 1).find('X')
+        filename_middle = filename[ind + 1:]
+        ind_2 = filename_middle.find('_')
+        date = filename_middle[:ind_2]
     else:
         ind = filename.replace('_', 'X', 1).find('_')
         filename_middle = filename[ind + 1:]
