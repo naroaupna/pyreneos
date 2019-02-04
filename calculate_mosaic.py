@@ -10,6 +10,8 @@ import os
 import create_file_df as cfdf
 from osgeo import gdal
 import sys
+import multiprocessing
+
 
 
 BAND_02 = 'B02'
@@ -39,6 +41,8 @@ def calculate_mosaic(path):
     args:
         path (string): This is the path where all the images are stored.
     """
+    print("Este es el numero de nucleos que utiliza mi programa de mosaiquear: ")
+    print(multiprocessing.cpu_count())
     dataFrame = cfdf.create_df(path)
     dataFrame_copy = dataFrame.copy()
     path_band04, path_band08, path_band03, path_band05, path_band02, path_band06, path_band07, path_band8A, \

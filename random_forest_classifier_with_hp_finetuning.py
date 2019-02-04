@@ -37,6 +37,7 @@ def rf_classifier_V3(path_to_data, split_number):
     X_test  = test[features_index]
     y_test = test.iloc[:, -2]
     ######
+    #TODO: seria buena idea cambiar algun parametro, como por ejemplo el n_stimators, a mas de 100
     clf = RandomForestClassifier()
     random_grid = _create_hyperparameter_finetuning_grid()
     clf_random = RandomizedSearchCV(estimator=clf, param_distributions=random_grid,

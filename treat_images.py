@@ -11,6 +11,6 @@ import calculate_mosaic as cm
 import correct_images_with_mask as ciwm
 import sys
 
-
-cm.calculate_mosaic(sys.argv[1])
-ciwm.correct_images(sys.argv[1], True)
+path = '/home/naroairirarte/Desktop/im_2015Maria/2015'
+cm.calculate_mosaic(path)
+ciwm.correct_images(path, True)

@@ -13,6 +13,7 @@ import raster_finder as rf
 import os
 import pandas as pd
 import geopandas as gpd
+import numpy as np
 
 def get_zonal_stats(path_to_shape, path_to_rasters):
     """
@@ -47,6 +48,9 @@ def get_zonal_stats(path_to_shape, path_to_rasters):
                 df2 = df.rename(columns=dict(zip(metrics, new_colnames)))
                 working_zones = working_zones.join(df2)
     path_to_new_shape = path_to_shape.replace('.shp', '_with_stats.shp')
+    path_to_txt = path_to_new_shape.replace('.shp', '_with_stats.txt')
+    working_zones_2 = working_zones.copy()
+    working_zones_2.to_csv(path_to_txt, header=True, index=False, sep='\t', mode='a')
     working_zones.__class__ = gpd.GeoDataFrame
     working_zones.set_geometry('geometry')
     working_zones.to_file(path_to_new_shape, driver='ESRI Shapefile')
@@ -76,4 +80,4 @@ def _is_image_to_calculate_stats(raster):
            ('_masked_B04' in raster) or ('_NDVI' in raster)
 
 
-get_zonal_stats('/home/naroairirarte/Desktop/stats/Dec16_V181003_buffer5m.shp', '/home/naroairirarte/Desktop/stats')
+get_zonal_stats('/home/naroairirarte/Desktop/zonal_test/shape/Dec16_V181018_buffer5m.shp', '/home/naroairirarte/Desktop/zonal_test/2016')
